@@ -18,10 +18,12 @@ for i in dado: # ajusta dados adequar a matriz tornando mes de 1a3 para de 0a1
 dado = x # dado apos tratamentos
 meses_provedores=dado.pop(0) ## pega cabeçalho
 
-M_melhor = [-1]*meses_provedores[0] #cria matriz de meses por meses
-M_melhor= [cp.deepcopy(M_melhor) for i in range(meses_provedores[0])]
+M_melhor = [cp.deepcopy([-1]*meses_provedores[0]) for i in range(meses_provedores[0])]#cria matriz de meses por meses
 M_provedores = cp.deepcopy(M_melhor)
-#M_provedores = cp.deepcopy(M_melhor) ## ele cria uma copia do arquivo separando do indereço de memoria inicial do copiado , caso não seja usado as duas variaveia usaram o mesmo endereço de moria prejudicando o funcionamento do codigo
+#M_provedores = cp.deepcopy(M_melhor) 
+#    ## ele cria uma copia do arquivo separando do indereço de memoria
+#       inicial do copiado , caso não seja usado as duas variaveia usaram o mesmo endereço de moria prejudicando
+#        o funcionamento do codigo
 
 for i in range(len(dado)):  ## os dois for percorem da diagonal principal da matriz para cima 
     for j in  range(i+1,len(dado)):
