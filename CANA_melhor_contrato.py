@@ -28,9 +28,9 @@ M_provedores = cp.deepcopy(M_melhor)
 for i in range(len(dado)):  ## os dois for percorem da diagonal principal da matriz para cima 
     for j in  range(i+1,len(dado)):
         
-        if (dado[i][1]==dado[j][1]) and (dado[i][2]==dado[j][2]):  
+        if (dado[i][1]==dado[j][1]) and (dado[i][2]==dado[j][2]): # verifica se são os mesmos contratos que estão sendo comparados  
            
-            if (dado[i][3]<=dado[j][3]):
+            if (dado[i][3]<=dado[j][3]): # verifica se quem é menor é o do primeiro provedor e adiciona nas matrizes o valor do contrato e seu provedor caso contrario faz o mesmo para o outro provedor
                 M_melhor[(dado[i][1])][(dado[i][2])] = dado[i][3]  
                 M_provedores[(dado[i][1])][(dado[i][2])] = dado[i][0] 
             else:
@@ -39,13 +39,17 @@ for i in range(len(dado)):  ## os dois for percorem da diagonal principal da mat
 
 print(M_melhor)
 print(M_provedores)
-soma = 0
-s_contratos=[]
-soma2 =0
+
+soma = 0 # variavel para armazenar o valor do contrato completo mais barato
+s_contratos=[] # variavel para armazenar os os contratos e seus provedores do total mais barato
+
+# os de baixo são variaveis auxiliares para descobrir os valores de cada teste de contrato
+soma2 =0    
 s2_contratos=[]
+
 for i in range(len(M_melhor)):
-    for j in range(i,len(M_melhor)):
-        soma2+=M_melhor[i][j]
+    for j in range(i if i==0 else i+1 ,len(M_melhor)):
+        soma2+=M_melhor[i][j]   # recebe o primeiro valor do teste 
         s2_contratos.append([M_provedores[i][j],i,j])
         for k in range(len(M_melhor)):
             for l in range(k,len(M_melhor)):
@@ -65,5 +69,6 @@ for i in range(len(M_melhor)):
         else:
             soma2=0
             s2_contratos.clear()
+
 print("contrato",s_contratos)
 print("preço",soma)
