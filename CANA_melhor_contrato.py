@@ -37,7 +37,15 @@ for i in range(len(dado)):  ## os dois for percorem da diagonal principal da mat
                 M_melhor[(dado[i][1])][(dado[i][2])] = dado[j][3]
                 M_provedores[(dado[i][1])][(dado[i][2])] = dado[j][0] 
 
+print("                                                          ╔══════════•ೋೋ•══════════╗ ")
+print("                                                                ANALISE DE CONTRATOS")
+print("                                                          ╚══════════•ೋೋ•══════════╝")
+print("")
+print("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬| MESES PROVEDORES |▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬")
 print(M_melhor)
+print("")
+print("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬")
+print("")
 print(M_provedores)
 
 soma = 0 # variavel para armazenar o valor do contrato completo mais barato
@@ -59,6 +67,7 @@ for i in range(len(M_melhor)):
                 s2_contratos.append([M_provedores[k][l],k,l])
                 break
         print(soma2)
+        print("⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤")
         print(s2_contratos)
         if soma>soma2 or soma==0:
             soma=soma2
@@ -70,5 +79,9 @@ for i in range(len(M_melhor)):
             soma2=0
             s2_contratos.clear()
 
-print("contrato",s_contratos)
-print("preço",soma)
+print("")
+
+print("●▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬●")
+print("CONTRATO MAIS ACESSÍVEL:",s_contratos)
+print("PREÇO:",soma,"$")
+print("●▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬●")
