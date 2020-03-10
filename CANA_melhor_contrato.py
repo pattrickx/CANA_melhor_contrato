@@ -126,10 +126,10 @@ def melhor_contrato(meses,M_melhor,M_provedores): # Questão G e I
 
 # melhor contrato para periodo de 1 a N
 ini = datetime.now()
-s_contratos,soma=melhor_contrato(5,M_melhor,M_provedores)
+s_contratos,soma=melhor_contrato(20,M_melhor,M_provedores)
 #s_contratos,soma=melhor_contrato(len(M_melhor),M_melhor,M_provedores)
 fim = datetime.now()
-print("Tempo de execução: ",(fim-ini).total_seconds()/60,'min')
+print("Tempo de execução: ",(fim-ini).total_seconds(),'s')
 print("contrato: ",s_contratos)
 print("preço: ",soma)
 
@@ -137,6 +137,6 @@ print("preço: ",soma)
 ini = datetime.now()
 s_contratos,soma=melhor_contrato(len(M_melhor),M_melhor,M_provedores)
 fim = datetime.now()
-print("Tempo de execução: ",(fim-ini).total_seconds()/60,'min')
+print("Tempo de execução: ",(fim-ini).total_seconds(),'s')
 print("contrato: ",s_contratos)
 print("preço: ",soma)
