@@ -38,14 +38,14 @@ def menor_contrato(dado,meses,provedores): # Questão E e F
         for j in range(meses):      # Linear
             if valor>dado[i][j][j]:
                 valor=dado[i][j][j]
-                contrato=[i,j,j,valor]
+                contrato=[i+1,j+1,j+1,valor]
     return contrato
 
 dado,meses_provedores= entrada('entrada.txt')
  ## pega cabeçalho
 print("dados tratados")
 
-print('menor_contrato_vendedor 1 : ',menor_contrato_vendedor(1,dado,meses_provedores[0])) 
+print('menor_contrato_vendedor 2 : ',menor_contrato_vendedor(1,dado,meses_provedores[0])) 
 print('menor_contrato total: ',menor_contrato(dado,meses_provedores[0],meses_provedores[1]))
 
 
@@ -67,7 +67,7 @@ for i in range(meses_provedores[0]):
                 M_provedores[i][j]=k
 
 fim = datetime.now()
-print("Tempo de execução:",(fim-ini).total_seconds(),'s')
+print("Tempo de execução:",(fim-ini).total_seconds()*1000,'ms')
 
 print("organizado")
 # print("Melhor preço: ",M_melhor)
@@ -86,14 +86,14 @@ def melhor_contrato(meses,M_melhor,M_provedores): # Questão G e I
     for i in range(meses):
         for j in range(i if i==0 else i+1 ,meses):
             soma2+=M_melhor[i][j]   # recebe o primeiro valor do teste 
-            s2_contratos.append([M_provedores[i][j],i,j])
+            s2_contratos.append([M_provedores[i][j]+1,i+1,j+1])
             for k in range(meses):
                 for l in range(k,meses):
                     if k==i or (l>=i and l<=j):
                         break
-                    n+=1
+                    # n+=1
                     soma2 += M_melhor[k][l]
-                    s2_contratos.append([M_provedores[k][l],k,l])
+                    s2_contratos.append([M_provedores[k][l]+1,k+1,l+1])
                     break
             # print(s2_contratos)
             # print(soma2)
@@ -107,7 +107,7 @@ def melhor_contrato(meses,M_melhor,M_provedores): # Questão G e I
             else:
                 soma2=0
                 s2_contratos.clear()
-    print("quantidade de operaçoes: ",n)
+    # print("quantidade de operaçoes: ",n)
     return s_contratos,soma
 
 # melhor contrato para periodo de 1 a N
@@ -115,7 +115,7 @@ ini = datetime.now()
 s_contratos,soma=melhor_contrato(2,M_melhor,M_provedores)
 #s_contratos,soma=melhor_contrato(len(M_melhor),M_melhor,M_provedores)
 fim = datetime.now()
-print("Tempo de execução: ",(fim-ini).total_seconds(),'s')
+print("Tempo de execução: ",(fim-ini).total_seconds()*1000,'ms')
 print("contrato: ",s_contratos)
 print("preço: ",soma)
 
@@ -123,6 +123,6 @@ print("preço: ",soma)
 ini = datetime.now()
 s_contratos,soma=melhor_contrato(len(M_melhor),M_melhor,M_provedores)
 fim = datetime.now()
-print("Tempo de execução: ",(fim-ini).total_seconds(),'s')
+print("Tempo de execução: ",(fim-ini).total_seconds()*1000,'ms')
 print("contrato: ",s_contratos)
 print("preço: ",soma)
