@@ -41,37 +41,27 @@ def menor_contrato(dado,meses,provedores): # Questão E e F
                 contrato=[i+1,j+1,j+1,valor]
     return contrato
 
-dado,meses_provedores= entrada('entrada.txt')
- ## pega cabeçalho
-print("dados tratados")
 
-print('menor_contrato_vendedor 2 : ',menor_contrato_vendedor(1,dado,meses_provedores[0])) 
-print('menor_contrato total: ',menor_contrato(dado,meses_provedores[0],meses_provedores[1]))
+def melhores(meses,provedores,dado):
+    M_melhor = [cp.deepcopy([0]*meses) for i in range(meses)]#cria matriz de meses por meses
+    M_provedores = cp.deepcopy(M_melhor)
+    #M_provedores = cp.deepcopy(M_melhor) 
+    #    ## ele cria uma copia do arquivo separando do indereço de memoria
+    #       inicial do copiado , caso não seja usado as duas variaveia usaram o mesmo endereço de moria prejudicando
+    #        o funcionamento do codigo
+    
 
+    for i in range(meses): 
+        for j in  range(i,meses):
+            valor=0
+            for k in range(provedores):
+                if valor==0 or valor>dado[k][i][j]: 
+                    valor=dado[k][i][j]
+                    M_melhor[i][j]=valor
+                    M_provedores[i][j]=k
 
-M_melhor = [cp.deepcopy([0]*meses_provedores[0]) for i in range(meses_provedores[0])]#cria matriz de meses por meses
-M_provedores = cp.deepcopy(M_melhor)
-#M_provedores = cp.deepcopy(M_melhor) 
-#    ## ele cria uma copia do arquivo separando do indereço de memoria
-#       inicial do copiado , caso não seja usado as duas variaveia usaram o mesmo endereço de moria prejudicando
-#        o funcionamento do codigo
-ini = datetime.now()
+    return M_melhor,M_provedores
 
-for i in range(meses_provedores[0]): 
-    for j in  range(i,meses_provedores[0]):
-        valor=0
-        for k in range(meses_provedores[1]):
-            if valor==0 or valor>dado[k][i][j]: 
-                valor=dado[k][i][j]
-                M_melhor[i][j]=valor
-                M_provedores[i][j]=k
-
-fim = datetime.now()
-print("Tempo de execução:",(fim-ini).total_seconds()*1000,'ms')
-
-print("organizado")
-# print("Melhor preço: ",M_melhor)
-# print("provedores: ",M_provedores)
 def melhor_contrato(meses,M_melhor,M_provedores): # Questão G e I
     soma = 0 # variavel para armazenar o valor do contrato completo mais barato
     s_contratos=[] # variavel para armazenar os os contratos e seus provedores do total mais barato
@@ -84,12 +74,12 @@ def melhor_contrato(meses,M_melhor,M_provedores): # Questão G e I
     soma=0
     n=0
     for i in range(meses):
-        for j in range(i if i==0 else i+1 ,meses):
+        for j in range(i ,meses):
             soma2+=M_melhor[i][j]   # recebe o primeiro valor do teste 
             s2_contratos.append([M_provedores[i][j]+1,i+1,j+1])
             for k in range(meses):
                 for l in range(k,meses):
-                    if k==i or (l>=i and l<=j):
+                    if (k>=i and k<=j)  or (l>=i and l<=j):
                         break
                     # n+=1
                     soma2 += M_melhor[k][l]
@@ -110,18 +100,33 @@ def melhor_contrato(meses,M_melhor,M_provedores): # Questão G e I
     # print("quantidade de operaçoes: ",n)
     return s_contratos,soma
 
-# melhor contrato para periodo de 1 a N
+dado,meses_provedores= entrada('entrada.txt')
+ ## pega cabeçalho
+
+
+print('menor_contrato_vendedor 2 : ',menor_contrato_vendedor(1,dado,meses_provedores[0])) 
+print('menor_contrato total: ',menor_contrato(dado,meses_provedores[0],meses_provedores[1]))
+
 ini = datetime.now()
-s_contratos,soma=melhor_contrato(2,M_melhor,M_provedores)
-#s_contratos,soma=melhor_contrato(len(M_melhor),M_melhor,M_provedores)
+M_melhor,M_provedores=melhores(meses_provedores[0],meses_provedores[1],dado)
 fim = datetime.now()
-print("Tempo de execução: ",(fim-ini).total_seconds()*1000,'ms')
-print("contrato: ",s_contratos)
-print("preço: ",soma)
+print("Tempo de execução:",(fim-ini).total_seconds()*1000,'ms')
+
+# print("organizado")
+# # print("Melhor preço: ",M_melhor)
+# # print("provedores: ",M_provedores)
+# # melhor contrato para periodo de 1 a N
+# ini = datetime.now()
+# s_contratos,soma=melhor_contrato(2,M_melhor,M_provedores)
+# #s_contratos,soma=melhor_contrato(len(M_melhor),M_melhor,M_provedores)
+# fim = datetime.now()
+# print("Tempo de execução: ",(fim-ini).total_seconds()*1000,'ms')
+# print("contrato: ",s_contratos)
+# print("preço: ",soma)
 
 # melhor contrato para periodo total
 ini = datetime.now()
-s_contratos,soma=melhor_contrato(len(M_melhor),M_melhor,M_provedores)
+s_contratos,soma=melhor_contrato(meses_provedores[0],M_melhor,M_provedores)
 fim = datetime.now()
 print("Tempo de execução: ",(fim-ini).total_seconds()*1000,'ms')
 print("contrato: ",s_contratos)
