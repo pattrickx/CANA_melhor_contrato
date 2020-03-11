@@ -62,7 +62,8 @@ def melhores(meses,provedores,dado):
 
     return M_melhor,M_provedores
 
-def melhor_contrato(meses,M_melhor,M_provedores): # Questão G e I
+
+def menor(meses,M_melhor,M_provedores):
     soma = 0 # variavel para armazenar o valor do contrato completo mais barato
     s_contratos=[] # variavel para armazenar os os contratos e seus provedores do total mais barato
 
@@ -74,60 +75,65 @@ def melhor_contrato(meses,M_melhor,M_provedores): # Questão G e I
     soma=0
     n=0
     for i in range(meses):
-        for j in range(i ,meses):
-            soma2+=M_melhor[i][j]   # recebe o primeiro valor do teste 
-            s2_contratos.append([M_provedores[i][j]+1,i+1,j+1])
-            for k in range(meses):
-                for l in range(k,meses):
-                    if (k>=i and k<=j)  or (l>=i and l<=j):
-                        break
-                    # n+=1
-                    soma2 += M_melhor[k][l]
-                    s2_contratos.append([M_provedores[k][l]+1,k+1,l+1])
-                    break
+        soma2=M_melhor[0][i]
+        s2_contratos.append([M_provedores[0][i],0,i])
+        for j in range(i+1 ,meses):
+               # recebe o primeiro valor do teste 
+            for k in range(j,meses):
+                soma2 += M_melhor[j][k]  
+                s2_contratos.append([M_provedores[j][k],j,k])
+                break
+                
             # print(s2_contratos)
             # print(soma2)
             
-            if soma>soma2 or soma==0:
-                soma=soma2
-                s_contratos.clear()
-                s_contratos=cp.deepcopy(s2_contratos)
-                soma2=0
-                s2_contratos.clear()
-            else:
-                soma2=0
-                s2_contratos.clear()
+        if soma>soma2 or soma==0:
+            soma=soma2
+            s_contratos.clear()
+            s_contratos=cp.deepcopy(s2_contratos)
+            soma2=0
+            s2_contratos.clear()
+        else:
+            soma2=0
+            s2_contratos.clear()
     # print("quantidade de operaçoes: ",n)
     return s_contratos,soma
+
 
 dado,meses_provedores= entrada('entrada.txt')
  ## pega cabeçalho
 
-
-print('menor_contrato_vendedor 2 : ',menor_contrato_vendedor(1,dado,meses_provedores[0])) 
+ini = datetime.now()
+print('menor_contrato_vendedor 2 : ',menor_contrato_vendedor(1,dado,meses_provedores[0]))
+fim = datetime.now()
+print("Tempo de execução:",(fim-ini).total_seconds()*1000,'ms')
+ini = datetime.now()
 print('menor_contrato total: ',menor_contrato(dado,meses_provedores[0],meses_provedores[1]))
+fim = datetime.now()
+print("Tempo de execução:",(fim-ini).total_seconds()*1000,'ms')
 
 ini = datetime.now()
 M_melhor,M_provedores=melhores(meses_provedores[0],meses_provedores[1],dado)
 fim = datetime.now()
-print("Tempo de execução:",(fim-ini).total_seconds()*1000,'ms')
+print("Tempo de execução para criação da matriz de melhores contratos:",(fim-ini).total_seconds()*1000,'ms')
 
-# print("organizado")
-# # print("Melhor preço: ",M_melhor)
-# # print("provedores: ",M_provedores)
-# # melhor contrato para periodo de 1 a N
-# ini = datetime.now()
-# s_contratos,soma=melhor_contrato(2,M_melhor,M_provedores)
-# #s_contratos,soma=melhor_contrato(len(M_melhor),M_melhor,M_provedores)
-# fim = datetime.now()
-# print("Tempo de execução: ",(fim-ini).total_seconds()*1000,'ms')
-# print("contrato: ",s_contratos)
-# print("preço: ",soma)
+#contratos de 1 a N periodos
+for i in range(121):
+    # contrato para 50 meses
+    ini = datetime.now()
+    s_contratos,soma=menor(i,M_melhor,M_provedores)
+    fim = datetime.now()
+    print("contrato: ",s_contratos)
+    print("preço: ",soma)
+    print("Tempo de execução: ",(fim-ini).total_seconds()*1000,'ms')
+
 
 # melhor contrato para periodo total
+
 ini = datetime.now()
-s_contratos,soma=melhor_contrato(meses_provedores[0],M_melhor,M_provedores)
+s_contratos,soma=menor(meses_provedores[0],M_melhor,M_provedores)
 fim = datetime.now()
-print("Tempo de execução: ",(fim-ini).total_seconds()*1000,'ms')
 print("contrato: ",s_contratos)
 print("preço: ",soma)
+print("Tempo de execução: ",(fim-ini).total_seconds()*1000,'ms')
+
