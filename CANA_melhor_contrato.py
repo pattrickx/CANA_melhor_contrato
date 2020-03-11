@@ -18,6 +18,10 @@ def entrada(nome_do_arquivo): # Questão A e B                                  
     ## split separa a string onde tem " " espaço
     ## map(float, vetor) transforma o vetor de string para float
     ## list transforma o tipo da ariavel de volta para lista pois o map altera para tipo map
+################################################################################################
+                
+                #   ESTRUTURA USADA FOI UMA MATRIZ TRIDIMENCIONAL
+                #   SUA COMPLEXIDADE É DE N*M*M
 
     return dado,meses_provedores # dado apos tratamentos                                # |       1      |     1      |
                                                                                         # | F(N)=(M(N))  |F(N)=(M(N^2)| *notação assintotica
@@ -31,8 +35,8 @@ def menor_contrato_vendedor(vendedor,dado,meses): # Questão C e D
     contrato=[vendedor,0,0,valor]                                                       # |       1      |     1      |
     for i in range(meses):                                                              # |      N+1     |    N+1     |
         if valor>dado[vendedor][i][i]:                                                  # |       N      |     N      |
-            valor=dado[vendedor][i][i]                                                  # |       0      |     1      |
-            contrato=[vendedor+1,i+1,i+1,valor]                                         # |       0      |     1      |
+            valor=dado[vendedor][i][i]                                                  # |       0      |     N      |
+            contrato=[vendedor+1,i+1,i+1,valor]                                         # |       0      |     N      |
     return contrato                                                                     # |       1      |     1      |
                                                                                         # |   F(N)= 1    |   F(N)=N   |*notação assintotica
 
@@ -42,11 +46,11 @@ def menor_contrato_vendedor(vendedor,dado,meses): # Questão C e D
 def menor_contrato(dado,meses,provedores): # Questão E e F
     valor=dado[0][0][0]                                                                 #|        1      |        1      |
     contrato=[0,0,valor]                                                                #|        1      |        1      |
-    for i in range(provedores):                                                         #|       1       |       M+1     |
-        for j in range(meses):      # Linear                                            #| [(N+1)] * M/2 | [(N+1)] * M/2 |
-            if valor>dado[i][j][j]:                                                     #| [(N+1)] *M*M  | [(N+1)]*M^2   |
-                valor=dado[i][j][j]                                                     #|        0      |       1       |
-                contrato=[i+1,j+1,j+1,valor]                                            #|        0      |       1       |
+    for i in range(provedores):                                                         #|        N      |        N      |
+        for j in range(meses):                                                          #|       N*M     |       N*M     |
+            if valor>dado[i][j][j]:                                                     #|       N*M     |       N*M     |
+                valor=dado[i][j][j]                                                     #|        0      |       N*M     |
+                contrato=[i+1,j+1,j+1,valor]                                            #|        0      |       N*M     |
     return contrato                                                                     #|        1      |       1       |
                                                                                         #| F(N)=(M(N))   |  F(N)=(M^2(N))| *notação assintotica
 
@@ -62,7 +66,7 @@ def melhores(meses,provedores,dado):
     #        o funcionamento do codigo
     
 
-    for i in range(meses):                                                             #|        N+1      |    N+1     |
+    for i in range(meses):                                                             #|        N        |    N       |
         for j in  range(i,meses):                                                      #|   [(N+1)]*N/2   | [(N+1)]*N/2|
             valor=0                                                                    #|        1        |     1      |
             for k in range(provedores):                                                #|        M+1      |     M      |
@@ -109,7 +113,7 @@ def menor(meses,M_melhor,M_provedores):
             soma2=0
             s2_contratos.clear()
     # print("quantidade de operaçoes: ",n)
-    return s_contratos,soma                                                            #|       0         |     1      |
+    return s_contratos,soma                                                            #|       1         |     1      |
 
 
 dado,meses_provedores= entrada('entrada.txt')
