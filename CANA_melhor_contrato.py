@@ -60,12 +60,12 @@ def menor_contrato(dado,meses,provedores): # Questão E e F
 #-------------------------------------------------------------------------------------------------------------------------------------------------------
 
 def menor_contrato_1_M(fim,vendedor,dado,meses): # Questão G e H
-    valor=dado[0][0][fim]                                                                #|        1      |        1      |
-    contrato=[0,0,fim,valor]                                                             #|        1      |        1      |
-    for i in range(vendedor):                                                            #|        N      |        N      |
-        if valor>dado[i][0][fim]:                                                        #|       N*M     |        N*M    |
-            valor=dado[i][0][fim]                                                        #|       1       |        N*M    |  
-            contrato=[i+1,1,fim+1,valor]                                                 #|       1       |        N*M    |
+    valor=dado[0][0][fim]                                                                #|       1       |        1      |
+    contrato=[0,0,fim,valor]                                                             #|       1       |        1      |
+    for i in range(vendedor):                                                            #|       N       |        N      |
+        if valor>dado[i][0][fim]:                                                        #|       N+1     |        N+1    |
+            valor=dado[i][0][fim]                                                        #|       1       |        N      |  
+            contrato=[i+1,1,fim+1,valor]                                                 #|       1       |        N      |
     return contrato                                                                      #|       1       |        1      |   
 
 #------------------------------------------[I,J]----------------------------------------------------")
