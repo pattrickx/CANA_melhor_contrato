@@ -2,16 +2,16 @@ import copy as cp
 from datetime import datetime
 # entrada de dado
 def entrada(nome_do_arquivo): # Questão A e B                                           # | MELHOR CASO | PIOR CASO |
-    arquivo=open(nome_do_arquivo,'r') # recebe arquivo em modo de leitura                 |      1      |      1      |
-    meses_provedores=list(map(int,arquivo.readline().strip().split(" ")))               # |      1      |      1      |
-    dado_bruto=arquivo.readlines() # cria um array com todas as linas do arquivo        # |      1      |      1      |
+    arquivo=open(nome_do_arquivo,'r') # recebe arquivo em modo de leitura                 |      1      |      1    |
+    meses_provedores=list(map(int,arquivo.readline().strip().split(" ")))               # |      1      |      1    |
+    dado_bruto=arquivo.readlines() # cria um array com todas as linas do arquivo        # |      1      |      1    |
     ## tratamento de dado
   
-    dado=[cp.deepcopy([0]*meses_provedores[0]) for i in range(meses_provedores[0])]     # |      1      |     M      |
-    dado=[cp.deepcopy(dado)for i in range(meses_provedores[1])]                         # |    M + 1    |      M     |
-    for i in range(len(dado_bruto)):                                                    # |      M      |    M+1     |
-        x=dado_bruto[i].strip().split(" ")                                              # |      1      |     1      |
-        dado[int(x[0])-1][int(x[1])-1][int(x[2])-1]=float(x[3])                         # | (N-1)*2 + 1 |  (N^2)*2/2 |
+    dado=[cp.deepcopy([0]*meses_provedores[0]) for i in range(meses_provedores[0])]     # |      1      |     M     |
+    dado=[cp.deepcopy(dado)for i in range(meses_provedores[1])]                         # |    M + 1    |      M    |
+    for i in range(len(dado_bruto)):                                                    # |      M      |    M+1    |
+        x=dado_bruto[i].strip().split(" ")                                              # |      1      |     1     |
+        dado[int(x[0])-1][int(x[1])-1][int(x[2])-1]=float(x[3])                         # | (N-1)*2 + 1 |  (N^2)*2/2|
 
     #dado[i]= [int(x) for x in (list(map(float,dado[i].strip().split(" "))))] # converte de float para int pois como ultimo valor é uma string representando float converter direto pra int não é possivel
     ## strip remove ultima posoção revendo o /n
@@ -67,6 +67,9 @@ def menor_contrato_1_M(fim,vendedor,dado,meses): # Questão G e H
             valor=dado[i][0][fim]                                                        #|       1       |        N      |  
             contrato=[i+1,1,fim+1,valor]                                                 #|       1       |        N      |
     return contrato                                                                      #|       1       |        1      |   
+                                                                                         #|   F(N)=O(N)   |     F(N)=O(N) | *notação assintotica
+    
+                                                                                         #| F(N)=O(N)|  *notação assintotica do metodo
 
 #------------------------------------------[I,J]----------------------------------------------------")
 #-------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -89,9 +92,12 @@ def melhores(meses,provedores,dado):
                     M_provedores[i][j]=k                                               #|        0        |[[(N+1)]*N/2]*M  |
 
     return M_melhor,M_provedores                                                       #|        1        |      M     |
-                                                                                       #|  F(N,M)=O((N^2)*M)   | F(N,M)=O((N^2)*M) | 
-                                                                                       #| F(N,M)=O((N^2)*M)   *notação assintotica
+                                                                                       #|  F(N,M)=O((N^2)*M)   | F(N,M)=O((N^2)*M) *notação assintotica
 
+                                                                                       #| F(N,M)=O((N^2)*M)   *notação assintotica do Metodo
+
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------
 def menor(meses,M_melhor,M_provedores):
     soma = 0 # variavel para armazenar o valor do contrato completo mais barato   
     s_contratos=[] # variavel para armazenar os os contratos e seus provedores do total mais barato
@@ -101,32 +107,37 @@ def menor(meses,M_melhor,M_provedores):
     s2_contratos=[]                                                                    
     #meses=len(M_melhor)
     #meses=5
-    soma=0                                                            #  Pior caso
+    soma=0
     n=0
-    for i in range(meses):                                           #|      M       |    
-        soma2=M_melhor[0][i]                                         #|      M       |
-        s2_contratos.append([M_provedores[0][i]+1,1,i+1,soma2])                #|      M       |
-        for j in range(i+1 ,meses):                                  #|  [(M+1)]*M/2 |
+    for i in range(meses):                                                                #|     M       |      M       |
+        soma2=M_melhor[0][i]                                                              #|     M       |      M       |
+        s2_contratos.append([M_provedores[0][i]+1,1,i+1,soma2])                           #|     M       |      M       |
+        for j in range(i+1 ,meses):                                                       #|     M+1     |  [(M+1)]*M/2 |
                # recebe o primeiro valor do teste 
-            #for k in range(j,meses):                                #|  [(M+1)]*M/2   
-            soma2 += M_melhor[j][j]                                  #|  [(M+1)]*M/2
-            s2_contratos.append([M_provedores[j][j]+1,j+1,j+1,M_melhor[j][j]])            #|  [(M+1)]*M/2
+            #for k in range(j,meses):
+            soma2 += M_melhor[j][j]                                                       #|     M+1     |  [(M+1)]*M/2 |
+            s2_contratos.append([M_provedores[j][j]+1,j+1,j+1,M_melhor[j][j]])            #|     M+1     |  [(M+1)]*M/2 |
                 #break
                 
-        if soma>soma2 or soma==0:                                   #|  [(M+1)]*M/2 |
-            soma=soma2                                              #|  [(M+1)]*M/2 |
-            s_contratos.clear()                                     #|  [(M+1)]*M/2 |
-            s_contratos=cp.deepcopy(s2_contratos)                   #|  [(M+1)]*M/2 |
-            soma2=0                                                 #|  [(M+1)]*M/2 |
-            s2_contratos.clear()                                    #|  [(M+1)]*M/2 |
-        else:                                                       #|      0
-            soma2=0                                                 #|      0
-            s2_contratos.clear()                                    #|      0
+        if soma>soma2 or soma==0:                                                         #|     1       |  [(M+1)]*M/2 |
+            soma=soma2                                                                    #|     1       |  [(M+1)]*M/2 |
+            s_contratos.clear()                                                           #|     1       |  [(M+1)]*M/2 |
+            s_contratos=cp.deepcopy(s2_contratos)                                         #|     1       |  [(M+1)]*M/2 |
+            soma2=0                                                                       #|     1       |  [(M+1)]*M/2 |
+            s2_contratos.clear()                                                          #|     1       |  [(M+1)]*M/2 |
+        else:                                                                             #|     0       |      0       |
+            soma2=0                                                                       #|     0       |      0       |
+            s2_contratos.clear()                                                          #|     0       |      0       |
     
-    return s_contratos,soma                                         #|       1         |     1      |
-                                                                    # F(M)=O(M^2)
+    return s_contratos,soma                                                               #|       1     |     1        |
+
+                                                                                          #| F(N,M)=O(M) | F(M)=O(M^2)  | *notação assintotica
+
+                                                                                          #| F(M)=O(M^2) |   *notação assintotica do Metodo
 
 
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------
  ## pega cabeçalho
 
 print("----------------------------------------[A,B]-------------------------------------------------------")
