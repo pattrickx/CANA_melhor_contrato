@@ -108,25 +108,25 @@ def menor(meses,M_melhor,M_provedores):
     #meses=5
     soma=0
     n=0
-    for i in range(meses):                                                                #|     N       |      N       |
+    for i in range(meses):                                                                #|     N+1     |     N+1      |
         soma2=M_melhor[0][i]                                                              #|     N       |      N       |
         s2_contratos.append([M_provedores[0][i]+1,1,i+1,soma2])                           #|     N       |      N       |
-        for j in range(i+1 ,meses):                                                       #|     N+1     |  [(M+1)]*M/2 |
+        for j in range(i+1 ,meses):                                                       #| [(N+1)]*N/2 |  [(N+1)]*N/2 |
                # recebe o primeiro valor do teste 
             #for k in range(j,meses):
-            soma2 += M_melhor[j][j]                                                       #|     N+1     |  [(M+1)]*M/2 |
-            s2_contratos.append([M_provedores[j][j]+1,j+1,j+1,M_melhor[j][j]])            #|     N+1     |  [(M+1)]*M/2 |
+            soma2 += M_melhor[j][j]                                                       #| [(N+1)]*N/2  |  [(N+1)]*N/2 |
+            s2_contratos.append([M_provedores[j][j]+1,j+1,j+1,M_melhor[j][j]])            #| [(N+1)]*N/2  |  [(N+1)]*N/2 |
                 #break
                 
-        if soma>soma2 or soma==0:                                                         #|     1       |  [(M+1)]*M/2 |
-            soma=soma2                                                                    #|     1       |  [(M+1)]*M/2 |
-            s_contratos.clear()                                                           #|     1       |  [(M+1)]*M/2 |
-            s_contratos=cp.deepcopy(s2_contratos)                                         #|     1       |  [(M+1)]*M/2 |
-            soma2=0                                                                       #|     1       |  [(M+1)]*M/2 |
-            s2_contratos.clear()                                                          #|     1       |  [(M+1)]*M/2 |
-        else:                                                                             #|     0       |      0       |
-            soma2=0                                                                       #|     0       |      0       |
-            s2_contratos.clear()                                                          #|     0       |      0       |
+        if soma>soma2 or soma==0:                                                         #| [(N+1)]*N/2 | [(N+1)]*N/2  |
+            soma=soma2                                                                    #|     1       |  [(N+1)]*N/2 |
+            s_contratos.clear()                                                           #|     1       |  [(N+1)]*N/2 |
+            s_contratos=cp.deepcopy(s2_contratos)                                         #|     1       |  [(N+1)]*N/2 |
+            soma2=0                                                                       #|     1       |  [(N+1)]*N/2 |
+            s2_contratos.clear()                                                          #|     1       |  [(N+1)]*N/2 |
+        else:                                                                             #|([(N+1)]*N/2)-1|      0       |
+            soma2=0                                                                       #|([(N+1)]*N/2)-1|      0       |
+            s2_contratos.clear()                                                          #|([(N+1)]*N/2)-1|      0       |
     
     return s_contratos,soma                                                               #|      1     |     1        |
 
