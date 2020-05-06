@@ -3,16 +3,16 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 public class DAO {
     private int[] head;
     private ArrayList<Contrato> lista = new ArrayList<>();
    
 	public DAO(String path){
-        Scanner read= new Scanner(System.in);
+        
         try{
             FileReader arq= new FileReader(path);
-            BufferedReader readArq= new BufferedReader(arq);
+            BufferedReader readArq = new BufferedReader(arq);
             
             String aux[]=readArq.readLine().split(" ");
             head= new int[aux.length];
