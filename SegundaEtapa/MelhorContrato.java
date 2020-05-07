@@ -17,11 +17,24 @@ public class MelhorContrato {
         System.out.println("Quantidade de Fornecedores: " + head[1]);
         tratamento.variablesInformation();
 
-        /// 
+        /// Fazendo Ordenações
         MergeSort mergesort = new MergeSort();
         mergesort.run(lContratos, 0, lContratos.size()-1);
         System.out.println("Tempo de execução MergeSort: "+mergesort.get_execution_time()+" ms");
-           
+        /*
+        HeapSort heapsort=  new HeapSort();
+        heapsort.run(add entradas nescessarias);
+        System.out.println("Tempo de execução HeapSort: "+heapsort.get_execution_time()+" ms");
+        
+        InsertionSort insertionsort =  new InsertionSort();
+        insertionsort.run(add entradas nescessarias);
+        System.out.println("Tempo de execução InsertionSort: "+insertionsort.get_execution_time()+" ms");
+
+        QuickSort quicksort = new QuickSort();
+        quicksort.run(add entradas nescessarias);
+        System.out.println("Tempo de execução QuickSort: "+insertionsort.get_execution_time()+" ms");
+        */
+        
         
     }
 }

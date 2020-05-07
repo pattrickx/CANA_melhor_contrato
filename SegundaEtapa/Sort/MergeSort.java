@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class MergeSort {
     Contrato max = new Contrato();
-    long x,time_ms;
+    long time_ms;
 
     public MergeSort() {
         max.setFornecedor(Integer.MAX_VALUE);
@@ -19,7 +19,7 @@ public class MergeSort {
         ArrayList<Contrato> c = RUN(contratos,inicio,fim);
         time_ms = System.currentTimeMillis() - start;
         DAO.WriteTxt(c,"Output\\OutputMergeSort.txt");
-        // return c;
+       
 
     }
     public long get_execution_time(){
@@ -33,14 +33,14 @@ public class MergeSort {
             RUN(contratos, inicio, meio);
             RUN(contratos, meio + 1, fim);
             merge(contratos, inicio, meio, fim);
-            //System.out.println(x);
+            
         }
         return contratos;
 
     }
 
     public void merge(ArrayList<Contrato> contratos, int inicio, int meio, int fim) {
-        // System.out.println(++x);
+       
         int i = 0, j = 0;
         int n1 = meio - inicio + 1;
         int n2 = fim - meio;
