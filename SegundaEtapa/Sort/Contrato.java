@@ -1,4 +1,3 @@
-package Sort;
 
 public class Contrato {
     
@@ -12,8 +11,7 @@ public class Contrato {
  
 	public int getFornecedor() { 
 		return fornecedor; 
-	} 
- 
+	}  
  
 	public void setFornecedor(int fornecedor) { 
 		this.fornecedor = fornecedor; 
