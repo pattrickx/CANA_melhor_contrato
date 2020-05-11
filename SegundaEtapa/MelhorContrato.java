@@ -15,6 +15,9 @@ public class MelhorContrato {
         int head[] = tratamento.head();
         System.out.println("Quantidade de meses: "+head[0]);
         System.out.println("Quantidade de Fornecedores: "+head[1]);
+        HeapSort heap = new HeapSort();
+        heap.ordenar(lContratos);
+
         //MergeSort mergesort = new MergeSort();
 
         //mergesort.run();
