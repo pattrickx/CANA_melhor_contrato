@@ -1,3 +1,5 @@
+package Sort;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,7 +21,7 @@ public class InsertionSort {
 		Contrato aux;
 
 		for (int i = 0; i < n; i++) {
-			System.out.println("i(" + i + "): " + aAux.get(i).valorTotal);
+			// System.out.println("i(" + i + "): " + aAux.get(i).valorTotal);
 			aux = contratos.get(i);
 
 			j = i - 1;
