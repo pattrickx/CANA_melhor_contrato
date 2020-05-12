@@ -11,10 +11,11 @@ public class MelhorContrato {
     public static void main(String[] args) {
 
         
-    	DAO tratamento= new DAO("entrada.txt");
+    	DAO tratamento = new DAO("entrada.txt");
     	InsertionSort i = new InsertionSort();
         ArrayList<Contrato> lContratos= tratamento.getLista();
-        ArrayList<Contrato> teste = i.InsertionSort(lContratos);
+        i.InsertionSort(lContratos);
+        
         //float[][][] MContratos= tratamento.CreateGetMatrix();
         //int head[] = tratamento.head();
         //System.out.println("Quantidade de meses: "+head[0]);

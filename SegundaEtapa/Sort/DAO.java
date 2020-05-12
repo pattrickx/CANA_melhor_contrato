@@ -33,7 +33,7 @@ public class DAO {
 
                 lista.add(c);
                 
-                line= readArq.readLine();
+                line = readArq.readLine();
                 
             }
 
