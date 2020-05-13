@@ -6,7 +6,6 @@
 package Sort;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
@@ -17,23 +16,27 @@ public class QuickSort {
     
     
     public void run(ArrayList<Contrato> v,int esq, int dir){
+
         long start = System.currentTimeMillis();
-        ArrayList<Contrato> c = quicksort(v,esq,dir);
+        quicksort(v,esq,dir);
         time_ms = System.currentTimeMillis() - start;
-        DAO.WriteTxt(c,"Output\\OutputQuickSort.txt");
+        DAO.WriteTxt(v,"Output\\OutputQuickSort.txt");
         
         
+    }
+    public long get_execution_time(){
+        return time_ms;
     }
     
     
 
-    private static ArrayList<Contrato> quicksort(ArrayList<Contrato> v, int esq, int dir) {
+    private static void quicksort(ArrayList<Contrato> v, int esq, int dir) {
         if(esq < dir){   //recusividade continua enquanto direito for maior que esquerdo
             int j = separar(v,esq,dir);
             quicksort(v,esq,j-1);  //fazendo chamada recusiva até j-1//menores esquerda
             quicksort(v,j+1,dir);  //fazendo chamada recusiva até j+1//maiores direita
     }
-    return v;
+    
     }
 
     private static int separar(ArrayList<Contrato> v, int esq, int dir) {
