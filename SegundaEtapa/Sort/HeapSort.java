@@ -9,11 +9,11 @@ public class HeapSort {
 
         montarArvoreHeap(lista);
         int n = lista.size();
-        for (int i = lista.size() - 1; i > 0; i--) {
+        for (int i = lista.size() - 1; i >= 0; i--) {
 			//System.out.println("Heap: "+i);
             Contrato aux = lista.get(i);
-            lista.add(i, lista.get(0));
-            lista.add(0, aux);
+            lista.set(i, lista.get(0));
+            lista.set(0, aux);
             ordenarArvore(lista, 0, --n);
         }
         time_ms = System.currentTimeMillis() - start;

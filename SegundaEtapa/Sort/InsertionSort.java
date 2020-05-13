@@ -15,7 +15,7 @@ public class InsertionSort {
 		System.out.println(n);
 		Contrato aux;
 
-		for (int i = 0; i < n; i++) {
+		for (int i = 1; i < n; i++) {
 			//System.out.println("Insertion: "+i);
 			aux = contratos.get(i);
 
