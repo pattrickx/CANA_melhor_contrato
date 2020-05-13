@@ -23,7 +23,10 @@ public class MelhorContrato {
         // System.out.println("Tempo de execução MergeSort: "+mergesort.get_execution_time()+" ms");
 
         InsertionSort i = new InsertionSort();
-        i.InsertionSort(lContratos);
+       // i.InsertionSort(lContratos);
+       
+        QuickSort quicksort = new QuickSort();
+        quicksort.run(lContratos,0,lContratos.size()-1);
         /*
         HeapSort heapsort=  new HeapSort();
         heapsort.run(add entradas nescessarias);
