@@ -1,65 +1,43 @@
 package Sort;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class InsertionSort {
 	// iniciando a escrita do código do InsertionSort
 	// Eliude Soares!
-	long fim;
+	long time_ms;
 
 	public void InsertionSort(ArrayList<Contrato> contratos) {
 
-		ArrayList<Contrato> aAux = (ArrayList<Contrato>) contratos.clone();
-
-		int j;
 		long inicio = System.currentTimeMillis();
-		int n = aAux.size();
+		int j;
+		int n = contratos.size();
 		System.out.println(n);
 		Contrato aux;
 
 		for (int i = 0; i < n; i++) {
-			// System.out.println("i(" + i + "): " + aAux.get(i).valorTotal);
+			//System.out.println("Insertion: "+i);
 			aux = contratos.get(i);
 
 			j = i - 1;
 
-			while (j >= 0 && aAux.get(j).valorTotal > aux.valorTotal) {
+			while (j >= 0 && contratos.get(j).valorTotal > aux.valorTotal) {
 
-				aAux.set(j + 1, aAux.get(j));
+				contratos.set(j + 1, contratos.get(j));
 
 				j = j - 1;
 
 			}
-			aAux.set(j + 1, aux);
+			contratos.set(j + 1, aux);
 
 		}
-		fim = System.currentTimeMillis() - inicio;
-		exportarDados(aAux);
+		time_ms = System.currentTimeMillis() - inicio;
+			System.out.println("Insertion: "+time_ms);
+		DAO.WriteTxt(contratos,"Output\\OutputInsertionSort.txt");
 		
 	}
-
-	public void exportarDados(ArrayList<Contrato> saida) {
-
-		String fileName = "saida_ordenada.txt";
-
-		BufferedWriter writer;
-		try {
-			writer = new BufferedWriter(new FileWriter(fileName));
-			for (Contrato cc : saida) {
-
-				writer.write(cc.fornecedor + "|" + cc.getValorTotal() + "\n");
-
-			}
-
-			writer.close();
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		}
-
-	}
+	public long get_execution_time(){
+        return time_ms;
+    }
 
 }
