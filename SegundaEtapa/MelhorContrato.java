@@ -34,7 +34,7 @@ public class MelhorContrato {
         QuickSort quicksort = new QuickSort();
         System.out.println("Iniciando QuickSort");
         quicksort.run((ArrayList<Contrato>) lContratos.clone(),0,lContratos.size()-1);
-        System.out.println("Tempo de execução QuickSort: "+quicksort.get_execution_time()/1000+" s");
+        System.out.println("Tempo de execução QuickSort: "+quicksort.get_execution_time()+" ms");
         
         head(lContratos);
         HeapSort heapsort = new HeapSort();
