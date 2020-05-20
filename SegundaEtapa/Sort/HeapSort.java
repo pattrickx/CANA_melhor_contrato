@@ -2,20 +2,27 @@ package Sort;
 import java.util.ArrayList;
 
 public class HeapSort {
+    static long time_ms;
 
-    public static void ordenar(ArrayList<Contrato> lista) {
+    public static void run(ArrayList<Contrato> lista) {
+        long start = System.currentTimeMillis();
 
         montarArvoreHeap(lista);
-
         int n = lista.size();
-
-        for(int i = lista.size() - 1; i > 0; i--) {
+        for (int i = lista.size() - 1; i >= 0; i--) {
+			//System.out.println("Heap: "+i);
             Contrato aux = lista.get(i);
-            lista.add(i, lista.get(0));
-            lista.add(0, aux);
+            lista.set(i, lista.get(0));
+            lista.set(0, aux);
             ordenarArvore(lista, 0, --n);
         }
+        time_ms = System.currentTimeMillis() - start;
+			System.out.println("Heap: "+time_ms);
+        DAO.WriteTxt(lista,"Output\\OutputHeapSort.txt");
 
+    }
+    public long get_execution_time(){
+        return time_ms;
     }
 
     public static void montarArvoreHeap(ArrayList<Contrato> lista) {
