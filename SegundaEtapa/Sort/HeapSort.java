@@ -25,6 +25,8 @@ public class HeapSort {
         return time_ms;
     }
 
+
+    // Montar Árvore
     public static void montarArvoreHeap(ArrayList<Contrato> lista) {
         for(int posicao = (lista.size() - 1) /2; posicao >= 0; posicao--) {
             ordenarArvore(lista, posicao, lista.size());
@@ -33,22 +35,31 @@ public class HeapSort {
 
     public static void ordenarArvore(ArrayList<Contrato> lista, int posicao, int tamanhoDoVetor) {
         
-        // O indice de um no filho é duas vezes a posição do nó pai + 1
-
+        // Regra: indice do filho 1 é igual a 2x o indice do pai + 1
         int indiceFilhoUm = 2 * posicao + 1;
+
+        // Regra: o indice do filho 2 é igual ao indice do filho 1 + 1
         int indiceFilhoDois = indiceFilhoUm + 1;
 
+        // Conferir se o indice dos dois filhos são menores que o tamanho do vetor
         if(indiceFilhoUm < tamanhoDoVetor) {
             if(indiceFilhoDois < tamanhoDoVetor) {
+
+                // Atribuir o maior valor ao indice do filho 1 para posteriormente compararmos ele com o pai
                 if(lista.get(indiceFilhoUm).getValorTotal() < lista.get(indiceFilhoDois).getValorTotal()) {
                     indiceFilhoUm = indiceFilhoDois;
                 }
             }
+
+            // Ver se o maior filho é maior que o pai
             if(lista.get(indiceFilhoUm).getValorTotal() > lista.get(posicao).getValorTotal()) {
+
+                // Caso seja maior trocaremos ele de posição com seu pai
                 Contrato aux = lista.get(indiceFilhoUm);
                 lista.set(indiceFilhoUm, lista.get(posicao));
                 lista.set(posicao, aux);
     
+                // Repetiremos o processo porém agora começando pelo filho
                 ordenarArvore(lista, indiceFilhoUm, tamanhoDoVetor);
             }
         }
