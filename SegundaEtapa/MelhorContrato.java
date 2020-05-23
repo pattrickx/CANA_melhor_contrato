@@ -22,17 +22,10 @@ public class MelhorContrato {
         System.out.println("Quantidade de meses: " + head[0]);
         System.out.println("Quantidade de Fornecedores: " + head[1]);
         tratamento.variablesInformation();
-        // for(int i=0;i<10;i++){
-        //     for(int j=0;j<10;j++){
-        //         System.out.print(MContratos[0][i][j]+"  ");
-        //     }    System.out.println();
-        // } 
-        // System.out.println();
-        // System.out.println();
         // Fazendo Ordenações
 
-        head(lContratos);
-        MinHeapSort min= new MinHeapSort();
+        head(lContratos);  
+        MinHeapSort min= new MinHeapSort(); // versão modificada para melhor atender os dados de entrada
         System.out.println("Iniciando MinHeapSort");
         min.buildminheap(MContratos);
         System.out.println("Tempo de execução MinHeapSort: "+min.get_execution_time()+" ms\n");

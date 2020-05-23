@@ -17,7 +17,6 @@ public class HeapSort {
             ordenarArvore(lista, 0, --n);
         }
         time_ms = System.currentTimeMillis() - start;
-			System.out.println("Heap: "+time_ms);
         DAO.WriteTxt(lista,"Output\\OutputHeapSort.txt");
 
     }

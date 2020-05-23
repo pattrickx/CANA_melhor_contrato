@@ -12,7 +12,6 @@ public class InsertionSort {
 		long inicio = System.currentTimeMillis();
 		int j;
 		int n = contratos.size();
-		System.out.println(n);
 		Contrato aux;
 
 		for (int i = 1; i < n; i++) {
@@ -32,7 +31,6 @@ public class InsertionSort {
 
 		}
 		time_ms = System.currentTimeMillis() - inicio;
-			System.out.println("Insertion: "+time_ms);
 		DAO.WriteTxt(contratos,"Output\\OutputInsertionSort.txt");
 		
 	}
