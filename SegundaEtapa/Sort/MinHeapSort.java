@@ -75,7 +75,6 @@ public class MinHeapSort {
             }
 
             time_ms = System.currentTimeMillis() - start;
-			System.out.println("Heap: "+time_ms);
             DAO.WriteTxt(organizado,"Output\\OutputMinHeapSort.txt");
 
     }
