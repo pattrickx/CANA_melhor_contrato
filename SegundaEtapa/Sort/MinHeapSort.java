@@ -38,7 +38,7 @@ public class MinHeapSort {
             
             Contrato[] V= new Contrato[m.length*m[0].length];                      //1
             int vp=0;                                                              //1
-            
+            // pega contratos das diagonais principais de todos os fornecedores e adiciona a um array
             for(int i = 0;i<m.length;i++){                                         // M+1
             for(int j=0;j<m[0].length;j++){                                        // M*N+1
                 V[vp]=new Contrato();                                              // M*N
@@ -49,13 +49,14 @@ public class MinHeapSort {
                 vp++;                                                              // M*N
             }    
             }
-            /// criar heap
+            /// criar  arvore heap minimo
             for (int a = (V.length/2)-1; a >=0 ; a--) {                            // M/2
                 minheapfy(V, a,V.length);                                          // M/2 -1
                }
             
             int k = V.length - 1;                                                  // 1
-            
+            // remove menor elemento da arvore e adiciona o proximo de sua fila se houver, 
+            // se n houver realisa a execução convencional do heap sorte removendo o ultimo elemento da fila e adicionando no topo no lugar do removido
            while(k >= 0 ) {                                                        // M*N+1
                 if(V[0].mesFim+1<m[0].length){                                     // M*N
                     organizado.add(V[0]);                                          //<=M*N
