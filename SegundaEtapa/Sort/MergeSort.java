@@ -61,7 +61,7 @@ public class MergeSort {
                 contratos.set(k, L[i++]);                            //     >=1 e <=n
             } else {                                                 //     >=1 e <=n
                 contratos.set(k, R[j++]);                            //     >=1 e <=n
-            }                                                        //  Theta(N)
+            }                                                        //  O(N)
         }
     }
 

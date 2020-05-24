@@ -11,7 +11,7 @@ public class MinHeapSort {
 		return 2*(i)+2;
 	}
 
-	public void minheapfy (Contrato[] V, int i, int size) {
+	public void minheapfy (Contrato[] V, int i, int size) { // lgn l-> 2*p+1  p=0 l=2 -> p=2 l=6-> p=6 l=14-> p=14  l=30
 		int l = 2*(i)+1;
 		int r = l+1;
 
@@ -31,7 +31,7 @@ public class MinHeapSort {
         }
 	}
 
-	public void buildminheap (float[][][] m) {
+	public void buildminheap (float[][][] m) {                                    // M*N * lg(M*N)
         long start = System.currentTimeMillis();                                  //
         // for(int i=0;i<10;i++){
             ArrayList<Contrato> organizado= new ArrayList<Contrato>();            // 1
