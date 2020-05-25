@@ -3,13 +3,6 @@ package Sort;
 import java.util.ArrayList;
 public class MinHeapSort {
     static long time_ms;
-	public int left (int i) {
-		return 2*(i)+1;
-	}
-
-	public int right (int i) {
-		return 2*(i)+2;
-	}
 
 	public void minheapfy (Contrato[] V, int i, int size) { // lgn l-> 2*p+1  p=0 l=2 -> p=2 l=6-> p=6 l=14-> p=14  l=30
 		int l = 2*(i)+1;
@@ -31,7 +24,7 @@ public class MinHeapSort {
         }
 	}
 
-	public void buildminheap (float[][][] m) {                                    // M*N * lg(M*N)
+	public void buildminheap (float[][][] m) {                                    // O(M*N^2 * lg(M*N^2))
         long start = System.currentTimeMillis();                                  //
         // for(int i=0;i<10;i++){
             ArrayList<Contrato> organizado= new ArrayList<Contrato>();            // 1
@@ -50,28 +43,28 @@ public class MinHeapSort {
             }    
             }
             /// criar  arvore heap minimo
-            for (int a = (V.length/2)-1; a >=0 ; a--) {                            // M/2
-                minheapfy(V, a,V.length);                                          // M/2 -1
+            for (int a = (V.length/2)-1; a >=0 ; a--) {                            // N*M/2
+                minheapfy(V, a,V.length);                                          // N*M/2 -1
                }
             
             int k = V.length - 1;                                                  // 1
             // remove menor elemento da arvore e adiciona o proximo de sua fila se houver, 
             // se n houver realisa a execução convencional do heap sorte removendo o ultimo elemento da fila e adicionando no topo no lugar do removido
-           while(k >= 0 ) {                                                        // M*N+1
-                if(V[0].mesFim+1<m[0].length){                                     // M*N
-                    organizado.add(V[0]);                                          //<=M*N
-                    Contrato x=new Contrato();                                     //<=M*N
-                    x.fornecedor=V[0].fornecedor;                                  //<=M*N
-                    x.mesIni=V[0].mesIni;                                          //<=M*N
-                    x.mesFim=V[0].mesFim+1;                                        //<=M*N
-                    x.valorTotal=m[V[0].fornecedor][V[0].mesIni][V[0].mesFim+1];   //<=M*N
-                    V[0]=x;                                                        //<=M*N
-                    minheapfy(V, 0, k+1);                                          //<=M*N
+           while(k >= 0 ) {                                                        //  M*N^2+1
+                if(V[0].mesFim+1<m[0].length){                                     //  M*N^2
+                    organizado.add(V[0]);                                          //<=M*N^2
+                    Contrato x=new Contrato();                                     //<=M*N^2
+                    x.fornecedor=V[0].fornecedor;                                  //<=M*N^2
+                    x.mesIni=V[0].mesIni;                                          //<=M*N^2
+                    x.mesFim=V[0].mesFim+1;                                        //<=M*N^2
+                    x.valorTotal=m[V[0].fornecedor][V[0].mesIni][V[0].mesFim+1];   //<=M*N^2
+                    V[0]=x;                                                        //<=M*N^2
+                    minheapfy(V, 0, k+1);                                          //<=M*N^2
                 }
-                else{                                                              //<=M*N
-                organizado.add(V[0]);                                              //<=M*N
-                V[0] =V[k];                                                        //<=M*N
-                minheapfy(V, 0, k--);                                              //<=M*N
+                else{                                                              //<=M*N^2
+                organizado.add(V[0]);                                              //<=M*N^2
+                V[0] =V[k];                                                        //<=M*N^2
+                minheapfy(V, 0, k--);                                              //<=M*N^2
                 }
             }
 
