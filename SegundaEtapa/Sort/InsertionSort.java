@@ -13,7 +13,7 @@ public class InsertionSort {
 		long inicio = System.currentTimeMillis(); //inicio = tempo do sistema nesse momento										
 		int j; // o marcador de posições anteriores ao i(índice posição da minha chave)
 		int n = contratos.size(); // n é o tamanho no vetor de contratos, onde estão todos os contratos de todos os fornecedores
-		System.out.println(n);//----------------------------------------------------------C1-------------(1)
+		//System.out.println(n);//----------------------------------------------------------C1-------------(1)
 		Contrato aux;
 
 
@@ -67,7 +67,7 @@ public class InsertionSort {
 				}
 
 																										/*Complexidade: O(N^2)
-																										Notação: N = n*m, n = número de contratos 
+																										Notação: N = n^2*m, n = número de meses 
 																														  m = número de fornecedores*/
 			// como o j já foi decrementado dentro do while, então o aux agora será posicionado 
 			// na posição correta, ordenada.
