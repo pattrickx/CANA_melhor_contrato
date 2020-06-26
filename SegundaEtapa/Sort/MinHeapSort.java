@@ -52,7 +52,9 @@ public class MinHeapSort {
             // se n houver realisa a execução convencional do heap sorte removendo o ultimo elemento da fila e adicionando no topo no lugar do removido
            while(k >= 0 ) {                                                        //  M*N^2+1
                 if(V[0].mesFim+1<m[0].length){                                     //  M*N^2
+                    
                     organizado.add(V[0]);                                          //<=M*N^2
+
                     Contrato x=new Contrato();                                     //<=M*N^2
                     x.fornecedor=V[0].fornecedor;                                  //<=M*N^2
                     x.mesIni=V[0].mesIni;                                          //<=M*N^2

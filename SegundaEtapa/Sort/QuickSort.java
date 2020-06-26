@@ -55,8 +55,6 @@ public class QuickSort {
                 j--;                                                                     //|        1        |       0         |
             }
         }
-            
-        
         trocar(v,esq,j);                                                                 //|        1        |        0        |
         return j;                                                                        //|        1        |        0        |
     }

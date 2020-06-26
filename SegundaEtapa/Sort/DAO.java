@@ -7,12 +7,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
-
+import NewAlgoritmos.aresta;
+import NewAlgoritmos.grafo;
 public class DAO {
-    private int[] head;
+    private int head[];
+    private float taxa;
     private ArrayList<Contrato> lista = new ArrayList<>();
     private float matrix[][][];
-
+    private grafo g[];
     public DAO(String path) {
 
         try {
@@ -21,23 +23,52 @@ public class DAO {
 
             String aux[] = readArq.readLine().split(" ");
             head = new int[aux.length];
-            for (int i = 0; i < aux.length; i++)
+            for (int i = 0; i < aux.length-1; i++)
                 head[i] = Integer.parseInt(aux[i]);
-
+            taxa = Float.parseFloat(aux[aux.length-1]);
+            // head = meses, provedores
+            g = new grafo[head[0]+1];
             String line = readArq.readLine();
             Contrato c;
             while (line != null) {
 
                 String lineSplit[] = line.split(" ");
-
+                
                 c = new Contrato();
                 c.setFornecedor(Integer.parseInt(lineSplit[0]) - 1);
                 c.setMesIni(Integer.parseInt(lineSplit[1]) - 1);
                 c.setMesFim(Integer.parseInt(lineSplit[2]) - 1);
                 c.setValorTotal(Float.parseFloat(lineSplit[3]));
-
                 lista.add(c);
+                int fornecedor=Integer.parseInt(lineSplit[0]);
+                int origem=Integer.parseInt(lineSplit[1]);
+                int destino=Integer.parseInt(lineSplit[2]);
+                float peso=Float.parseFloat(lineSplit[3]);
+                if ( origem==1  ){
+                    origem-=1;
+                }else {
+                    origem-=1;
+                    peso+=taxa;
+                }
 
+            
+                if(g[origem]==null){
+                    g[origem]= new grafo();
+                    g[origem].arestas.add(new aresta(peso,destino,fornecedor));
+                }
+                else{
+                    boolean achou=false;
+                    for (aresta a : g[origem].arestas) {
+                        if (a.destino==destino && peso<a.peso){
+                            achou =true;
+                            g[origem].arestas.remove(a);
+                            g[origem].arestas.add(new aresta(peso,destino,fornecedor));
+                            break;
+                        }
+                    }
+                    if(achou==false)
+                        g[origem].arestas.add(new aresta(peso,destino,fornecedor));
+                }
                 line = readArq.readLine();
 
             }
@@ -47,6 +78,10 @@ public class DAO {
         }
 
     }
+    public grafo[] getGrafo(){
+        
+        return g;
+    }
 
     public float[][][] CreateGetMatrix() {
         matrix = new float[head[1]][head[0]][head[0]];
@@ -54,7 +89,6 @@ public class DAO {
         for (int i = 0; i < lista.size(); i++) {
             c = lista.get(i);
             matrix[c.getFornecedor()][c.getMesIni()][c.getMesFim()] = c.getValorTotal();
-
         }
         return matrix;
 
