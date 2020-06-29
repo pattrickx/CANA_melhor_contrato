@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-import NewAlgoritmos.aresta;
 import NewAlgoritmos.grafo;
 import Sort.Contrato;
 import Sort.DAO;
 import NewAlgoritmos.dijkstra;
+import NewAlgoritmos.Guloso;
 public class MelhorContrato {
     public static void head(ArrayList<Contrato>  lista){
         for (int i = 0;i<5;i++ )
@@ -25,6 +25,16 @@ public class MelhorContrato {
         dijkstra d=new dijkstra();
         System.out.println("iniciando dijkstra");
         d.dijkstra(g, 0, 120);
+
+        System.out.println("iniciando Guloso");
+        Guloso re=new Guloso();
+        float[][] Mvalue =tratamento.getBestMatrixValue();
+        int[][] Mprovedor=tratamento.getBestMatrixProvedor();
+        re.MinGuloso(Mvalue,Mprovedor,0, 119);
+
+
+
+        // System.out.println(Mprovedor[0][5]+" "+Mvalue[0][5]);
         
         // System.out.println("######## Informações da entrada ########");
         // System.out.println("Quantidade de meses: " + head[0]);

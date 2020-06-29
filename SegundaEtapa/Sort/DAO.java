@@ -14,6 +14,8 @@ public class DAO {
     private float taxa;
     private ArrayList<Contrato> lista = new ArrayList<>();
     private float matrix[][][];
+    private float bestValue[][];
+    private int bestProvedor[][];
     private grafo g[];
     public DAO(String path) {
 
@@ -51,7 +53,6 @@ public class DAO {
                     peso+=taxa;
                 }
 
-            
                 if(g[origem]==null){
                     g[origem]= new grafo();
                     g[origem].arestas.add(new aresta(peso,destino,fornecedor));
@@ -69,6 +70,12 @@ public class DAO {
                     if(achou==false)
                         g[origem].arestas.add(new aresta(peso,destino,fornecedor));
                 }
+                
+
+                
+                
+                
+                
                 line = readArq.readLine();
 
             }
@@ -78,6 +85,12 @@ public class DAO {
         }
 
     }
+    public float[][] getBestMatrixValue(){
+        return bestValue;
+    }
+    public int[][] getBestMatrixProvedor(){
+        return bestProvedor;
+    }
     public grafo[] getGrafo(){
         
         return g;
@@ -85,10 +98,23 @@ public class DAO {
 
     public float[][][] CreateGetMatrix() {
         matrix = new float[head[1]][head[0]][head[0]];
+        bestProvedor= new int [head[0]][head[0]];
+        bestValue= new float [head[0]][head[0]];
         Contrato c;
         for (int i = 0; i < lista.size(); i++) {
             c = lista.get(i);
             matrix[c.getFornecedor()][c.getMesIni()][c.getMesFim()] = c.getValorTotal();
+
+            float value=0;
+            if(c.getMesIni()==0)
+                value=c.getValorTotal();
+            else
+                value=c.getValorTotal()+taxa;
+
+            if(bestValue[c.getMesIni()][c.getMesFim()]== 0 || bestValue[c.getMesIni()][c.getMesFim()]>value){
+                bestValue[c.getMesIni()][c.getMesFim()] =value;
+                bestProvedor[c.getMesIni()][c.getMesFim()]=c.getFornecedor();
+            }
         }
         return matrix;
 
