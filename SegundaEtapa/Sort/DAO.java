@@ -71,10 +71,6 @@ public class DAO {
                         g[origem].arestas.add(new aresta(peso,destino,fornecedor));
                 }
                 
-
-                
-                
-                
                 
                 line = readArq.readLine();
 
@@ -105,14 +101,14 @@ public class DAO {
             c = lista.get(i);
             matrix[c.getFornecedor()][c.getMesIni()][c.getMesFim()] = c.getValorTotal();
 
-            float value=0;
-            if(c.getMesIni()==0)
-                value=c.getValorTotal();
-            else
-                value=c.getValorTotal()+taxa;
+            // float value=0;
+            // if(c.getMesIni()==0)
+            //     value=c.getValorTotal();
+            // else
+            //     value=c.getValorTotal()+taxa;
 
-            if(bestValue[c.getMesIni()][c.getMesFim()]== 0 || bestValue[c.getMesIni()][c.getMesFim()]>value){
-                bestValue[c.getMesIni()][c.getMesFim()] =value;
+            if(bestValue[c.getMesIni()][c.getMesFim()]== 0 || bestValue[c.getMesIni()][c.getMesFim()]>c.getValorTotal()){
+                bestValue[c.getMesIni()][c.getMesFim()] =c.getValorTotal();
                 bestProvedor[c.getMesIni()][c.getMesFim()]=c.getFornecedor();
             }
         }

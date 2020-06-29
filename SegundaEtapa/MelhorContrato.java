@@ -30,7 +30,7 @@ public class MelhorContrato {
         Guloso re=new Guloso();
         float[][] Mvalue =tratamento.getBestMatrixValue();
         int[][] Mprovedor=tratamento.getBestMatrixProvedor();
-        re.MinGuloso(Mvalue,Mprovedor,0, 119);
+        // re.MinGuloso(Mvalue,Mprovedor,0, 119,tratamento.head()[2]);
 
 
 
