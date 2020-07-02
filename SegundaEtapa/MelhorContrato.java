@@ -47,7 +47,7 @@ public class MelhorContrato {
         
         System.out.println("iniciando Dinamico");
         Dinamico Di = new Dinamico();
-        Di.MinDinamico(Mvalue,0, 119);
+        Di.MinDinamico(Mvalue,Mprovedor,0, 119);
 
 
         // System.out.println(Mprovedor[0][5]+" "+Mvalue[0][5]);

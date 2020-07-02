@@ -52,15 +52,16 @@ public class dijkstra {
         time_ms = System.currentTimeMillis() - start;
         // ArrayList<Contrato> caminho = new ArrayList<>();
         int vertice_atual= destino;
+        String show="";
         while(vertice_atual!=inicio){ 
             if(pai[vertice_atual]==0 || vertice_atual-1==pai[vertice_atual])
-                System.out.println(fornecedores[vertice_atual]+" "+(pai[vertice_atual]+1)+" "+(vertice_atual)+" "+(distancia[vertice_atual]-distancia[pai[vertice_atual]]));
+                show=(fornecedores[vertice_atual]+" "+(pai[vertice_atual]+1)+" "+(vertice_atual)+" "+(distancia[vertice_atual]-distancia[pai[vertice_atual]])+"\n")+show;
             else
-                System.out.println(fornecedores[vertice_atual]+" "+pai[vertice_atual]+" "+vertice_atual+" "+(distancia[vertice_atual]-distancia[pai[vertice_atual]]));
+                show=(fornecedores[vertice_atual]+" "+pai[vertice_atual]+" "+vertice_atual+" "+(distancia[vertice_atual]-distancia[pai[vertice_atual]])+"\n")+show;
 
             vertice_atual=pai[vertice_atual];
         }
-        
+        System.out.println(show);
         System.out.println("valor total: "+distancia[destino]);
         System.out.println("tempo: "+ time_ms+" ms");
 

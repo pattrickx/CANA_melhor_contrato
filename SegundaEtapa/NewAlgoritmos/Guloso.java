@@ -34,11 +34,11 @@ public class Guloso {
             if (aux<j)
                 qMin = minGuloso(values,provedores, i, aux,taxa)+minGuloso(values,provedores, aux+1, j,taxa);
             else
-                contratos+=provedores[i][j]+" "+i+" "+j+" "+ values[i][j]+"\n";
+                contratos+=(provedores[i][j]+1)+" "+(i+1)+" "+(j+1)+" "+ (values[i][j]+1)+"\n";
             return qMin;
         }
         else{
-            contratos+=provedores[i][j]+" "+i+" "+j+" "+ values[i][j]+"\n";
+            contratos+=(provedores[i][j]+1)+" "+(i+1)+" "+(j+1)+" "+ (values[i][j]+1)+"\n";
             return qMin;
         }
 	}
