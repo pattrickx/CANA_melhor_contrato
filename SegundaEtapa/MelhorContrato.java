@@ -5,6 +5,8 @@ import Sort.Contrato;
 import Sort.DAO;
 import NewAlgoritmos.dijkstra;
 import NewAlgoritmos.Guloso;
+import NewAlgoritmos.Memorization;
+import NewAlgoritmos.Dinamico;
 public class MelhorContrato {
     public static void head(ArrayList<Contrato>  lista){
         for (int i = 0;i<5;i++ )
@@ -26,12 +28,26 @@ public class MelhorContrato {
         System.out.println("iniciando dijkstra");
         d.dijkstra(g, 0, 120);
 
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         System.out.println("iniciando Guloso");
-        Guloso re=new Guloso();
+        
         float[][] Mvalue =tratamento.getBestMatrixValue();
         int[][] Mprovedor=tratamento.getBestMatrixProvedor();
-        // re.MinGuloso(Mvalue,Mprovedor,0, 119,tratamento.head()[2]);
+        Guloso re=new Guloso();
+        re.MinGuloso(Mvalue,Mprovedor,0, 119,tratamento.head()[2]);
 
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        // System.out.println("iniciando Memorization");
+        // Memorization Me=new Memorization();
+        // Me.MinMemorization(Mvalue,Mprovedor,0, 119,tratamento.head()[2]);
+        
+        System.out.println("iniciando Dinamico");
+        Dinamico Di = new Dinamico();
+        Di.MinDinamico(Mvalue,0, 119);
 
 
         // System.out.println(Mprovedor[0][5]+" "+Mvalue[0][5]);

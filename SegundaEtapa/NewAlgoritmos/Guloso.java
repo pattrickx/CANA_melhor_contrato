@@ -6,7 +6,7 @@ import Sort.Contrato;
 
 public class Guloso {
     float[][] best = new float[120][120];
-
+    String contratos='';
 	long time_ms;
 	ArrayList<Contrato> Contratos = new ArrayList<>();
 
@@ -15,30 +15,32 @@ public class Guloso {
         float MinValue=minGuloso(values, provedores,i,j,taxa);
 
         time_ms = System.currentTimeMillis() - inicio;
-        System.out.println("Best Value: "+MinValue);
-        System.out.println("Insertion: " + time_ms+" ms");
+
+        System.out.println(contratos);
+        System.out.println("Valor total: "+MinValue);
+        System.out.println("Tempo: " + (System.currentTimeMillis() - inicio)+" ms");
     }
 	private float minGuloso(float[][] values, int[][] provedores, int i, int j,float taxa) {
 
         float qMin = values[i][j];
         int aux=j;
-        if(i<=j){
-            
+        if(i<j){
             for (int k = i; k <j; k++) {
-                
-                if(qMin>values[i][k]+values[k+1][j]+taxa){
-                    qMin=values[i][k]+values[k+1][j]+taxa;
+                if(qMin>values[i][k]+values[k+1][j]){
+                    qMin=values[i][k]+values[k+1][j];
                     aux=k;
                 }
-            
             }
-
-            float q = minGuloso(values,provedores, i, aux,taxa)+minGuloso(values,provedores, aux+1, j,taxa);
-
+            if (aux<j)
+                qMin = minGuloso(values,provedores, i, aux,taxa)+minGuloso(values,provedores, aux+1, j,taxa);
+            else
+                contratos+=provedores[i][j]+" "+i+" "+j+" "+ values[i][j]+"\n";
+            return qMin;
         }
-        best[i][j] = qMin;
-        return qMin;
-
+        else{
+            contratos+=provedores[i][j]+" "+i+" "+j+" "+ values[i][j]+"\n";
+            return qMin;
+        }
 	}
 
 
