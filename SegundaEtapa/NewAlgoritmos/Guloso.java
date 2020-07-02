@@ -6,7 +6,7 @@ import Sort.Contrato;
 
 public class Guloso {
     float[][] best = new float[120][120];
-    String contratos='';
+    String contratos="";
 	long time_ms;
 	ArrayList<Contrato> Contratos = new ArrayList<>();
 

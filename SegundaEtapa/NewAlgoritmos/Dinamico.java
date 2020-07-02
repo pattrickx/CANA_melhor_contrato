@@ -19,7 +19,7 @@ public class Dinamico {
 			}
 		}
         
-		System.out.println( m[0][fim]);
+		System.out.println("Valor total: "+m[0][fim]);
 		System.out.println("Tempo: " + (System.currentTimeMillis() - time)+" ms");
 		
     }
