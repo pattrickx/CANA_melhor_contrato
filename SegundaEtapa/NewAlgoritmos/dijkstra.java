@@ -1,9 +1,6 @@
 package NewAlgoritmos;
-import java.util.ArrayList;
 
-import NewAlgoritmos.aresta;
 import NewAlgoritmos.grafo;
-import Sort.Contrato;
 public class dijkstra {
     long time_ms;
     public int extract_min(float Q[],boolean S[]){
@@ -19,41 +16,45 @@ public class dijkstra {
         return min;
     }
     public void dijkstra(grafo g[],int inicio, int destino){
-        long start = System.currentTimeMillis();
-        // inicialisando variaveis 
+        
+        //#########################inicialisando variaveis 
         int[] fornecedores= new int[g.length];
         float[] distancia = new float[g.length];
         int[] pai = new int[g.length];
         boolean[] S = new boolean[g.length];
-        for( int v=0;v< g.length;v++){                              //   n
+        for( int v=0;v< g.length;v++){                              //   N
             distancia[v] = Float.POSITIVE_INFINITY;
             S[v]=false;
             pai[v] = -1;    
         }               
-        distancia[inicio] = 0;              
-        
-        
+        distancia[inicio] = 0;                      
         float[] Q= distancia.clone();
+        //###############################################
+
         //arvore
-        for(int i=0;i<g.length;i++){                                  // n+1
-            int v_min = extract_min(Q,S);                             // n^2
-            S[v_min]=true;                                            // n
+        //####################################### dijkstra
+        long start = System.currentTimeMillis();
+        for(int i=0;i<g.length;i++){                                  // N+1
+            int v_min = extract_min(Q,S);                             // N*(N+1)
+            S[v_min]=true;                                            // N
             
-            if(g[v_min]!=null)                                       //  n
-            for(aresta a : g[v_min].arestas){                        // n*<=n 
-                if(distancia[a.destino]>distancia[v_min]+a.peso){    // n*<=n
-                    distancia[a.destino]=distancia[v_min]+a.peso;    // n*<=n
-                    pai[a.destino]=v_min;                            // n*<=n
-                    fornecedores[a.destino]=a.fornecedor;            // n*<=n
+            if(g[v_min]!=null)                                       //  N
+            for(aresta a : g[v_min].arestas){                        // (N+1+1)N/2
+                if(distancia[a.destino]>distancia[v_min]+a.peso){    
+                    distancia[a.destino]=distancia[v_min]+a.peso;    
+                    pai[a.destino]=v_min;                            
+                    fornecedores[a.destino]=a.fornecedor;            
                 }
             }
         
-        }
+        }     
+        //####################################################     //O(N^2)
         time_ms = System.currentTimeMillis() - start;
         // ArrayList<Contrato> caminho = new ArrayList<>();
+        //###################### montando contratos e exibindo
         int vertice_atual= destino;
         String show="";
-        while(vertice_atual!=inicio){ 
+        while(vertice_atual!=inicio){   // O(N)
             if(pai[vertice_atual]==0 || vertice_atual-1==pai[vertice_atual])
                 show=(fornecedores[vertice_atual]+" "+(pai[vertice_atual]+1)+" "+(vertice_atual)+" "+(distancia[vertice_atual]-distancia[pai[vertice_atual]])+"\n")+show;
             else
@@ -62,6 +63,7 @@ public class dijkstra {
             vertice_atual=pai[vertice_atual];
         }
         System.out.println(show);
+
         System.out.println("valor total: "+distancia[destino]);
         System.out.println("tempo: "+ time_ms+" ms");
 

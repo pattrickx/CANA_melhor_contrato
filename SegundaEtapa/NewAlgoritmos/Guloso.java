@@ -7,20 +7,22 @@ import Sort.Contrato;
 public class Guloso {
     float[][] best = new float[120][120];
     String contratos="";
-	long time_ms;
+	
 	ArrayList<Contrato> Contratos = new ArrayList<>();
 
     public void MinGuloso(float[][] values, int[][] provedores, int i, int j,float taxa){
         long inicio = System.currentTimeMillis();
         float MinValue=minGuloso(values, provedores,i,j,taxa);
 
-        time_ms = System.currentTimeMillis() - inicio;
+        long time = System.currentTimeMillis() - inicio;
 
         System.out.println(contratos);
         System.out.println("Valor total: "+MinValue);
-        System.out.println("Tempo: " + (System.currentTimeMillis() - inicio)+" ms");
+        System.out.println("Tempo: " + time+" ms");
     }
-	private float minGuloso(float[][] values, int[][] provedores, int i, int j,float taxa) {
+    private float minGuloso(float[][] values, int[][] provedores, int i, int j,float taxa) {// melhor 2*T(N/2) + θ(N^2)
+                                                                                            // N^2
+                                                                                            // pior T(1) + T(N-1) + θ(N^2)
 
         float qMin = values[i][j];
         int aux=j;

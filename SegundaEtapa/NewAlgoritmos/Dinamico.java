@@ -11,16 +11,16 @@ public class Dinamico {
 			for (int j = i+1; j <= fim ; j++) 
 				s[i][j]=-1;
 		long time = System.currentTimeMillis();
-        for(int i = 0; i < fim ; i++) {
-			for (int j = i+1; j <= fim ; j++) {
-				for (int k = i; k < j ; k++) {
+        for(int i = 0; i < fim ; i++) {                   //(N+1)
+			for (int j = i+1; j <= fim ; j++) {			  //(N+1)N/2
+				for (int k = i; k < j ; k++) {			  //(N+1)N^2/2
                     if ( m[i][k]+m[k+1][j]<m[i][j]){
 						m[i][j]=m[i][k]+m[k+1][j];
                         s[i][j]=k;
                     }
 				}
 			}
-		}
+		}												//THETA(N^3)
 
 		time=(System.currentTimeMillis() - time);
         imprime(s,values,provedores, inicio, fim);
@@ -37,5 +37,6 @@ public class Dinamico {
 				imprime(s,values,provedores, s[i][j]+1, j);
 			}
 	}
-
+	//melhor caso:2T(n/2)+θ(1)   => θ(n)
+	//pior caso:T(1)+T(n-1)+θ(1)
 }
