@@ -20,8 +20,8 @@ public class Guloso {
         System.out.println("Valor total: "+MinValue);
         System.out.println("Tempo: " + time+" ms");
     }
-    private float minGuloso(float[][] values, int[][] provedores, int i, int j,float taxa) {// melhor 2*T(N/2) + θ(N^2)
-                                                                                            // N^2
+    private float minGuloso(float[][] values, int[][] provedores, int i, int j,float taxa) {// melhor 2*T(N/2) + θ(N)
+                                                                                            // N log N
                                                                                             // pior T(1) + T(N-1) + θ(N^2)
 
         float qMin = values[i][j];
